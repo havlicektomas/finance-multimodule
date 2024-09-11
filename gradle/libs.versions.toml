@@ -105,3 +105,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 room = { id = "androidx.room", version.ref = "room" }
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 
+runique-android-application = { id = "runique.android.application", version = "unspecified" }
+
