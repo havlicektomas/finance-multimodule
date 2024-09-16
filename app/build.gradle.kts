@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.runique.android.application)
+    alias(libs.plugins.runique.android.application.compose)
 }
 
 android {
@@ -10,12 +10,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -43,7 +37,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
