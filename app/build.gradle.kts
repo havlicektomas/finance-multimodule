@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.runique.android.application.compose)
+    alias(libs.plugins.finance.android.application.compose)
 }
 
 android {

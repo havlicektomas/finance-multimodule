@@ -16,12 +16,16 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "runique.android.application"
+            id = "finance.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("androidApplicationCompose") {
-            id = "runique.android.application.compose"
+            id = "finance.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+        register("androidLibrary") {
+            id = "finance.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
         }
     }
 }

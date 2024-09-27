@@ -105,5 +105,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 room = { id = "androidx.room", version.ref = "room" }
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 
-runique-android-application = { id = "runique.android.application", version = "unspecified" }
-runique-android-application-compose = { id = "runique.android.application.compose", version = "unspecified" }
+finance-android-application = { id = "finance.android.application", version = "unspecified" }
+finance-android-application-compose = { id = "finance.android.application.compose", version = "unspecified" }
+finance-android-library = { id = "finance.android.library", version = "unspecified" }
