@@ -108,3 +108,4 @@ androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp
 finance-android-application = { id = "finance.android.application", version = "unspecified" }
 finance-android-application-compose = { id = "finance.android.application.compose", version = "unspecified" }
 finance-android-library = { id = "finance.android.library", version = "unspecified" }
+finance-android-library-compose = { id = "finance.android.library.compose", version = "unspecified" }
