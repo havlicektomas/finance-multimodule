@@ -110,6 +110,7 @@ finance-android-application-compose = { id = "finance.android.application.compos
 finance-android-library = { id = "finance.android.library", version = "unspecified" }
 finance-android-library-compose = { id = "finance.android.library.compose", version = "unspecified" }
 finance-android-feature-ui = { id = "finance.android.feature.ui", version = "unspecified" }
+finance-android-room = { id = "finance.android.room", version = "unspecified" }
 
 [bundles]
 compose = [

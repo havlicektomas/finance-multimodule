@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.finance.android.library)
+    alias(libs.plugins.finance.android.room)
 }
 
 android {

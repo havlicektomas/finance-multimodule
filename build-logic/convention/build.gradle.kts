@@ -35,5 +35,9 @@ gradlePlugin {
             id = "finance.android.feature.ui"
             implementationClass = "AndroidFeatureUiConventionPlugin"
         }
+        register("androidRoom") {
+            id = "finance.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
     }
 }
