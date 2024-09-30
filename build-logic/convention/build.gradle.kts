@@ -43,5 +43,9 @@ gradlePlugin {
             id = "finance.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("jvmKtor") {
+            id = "finance.jvm.ktor"
+            implementationClass = "JvmKtorConventionPlugin"
+        }
     }
 }

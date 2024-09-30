@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.finance.android.application.compose)
+    alias(libs.plugins.finance.jvm.ktor)
 }
 
 android {
