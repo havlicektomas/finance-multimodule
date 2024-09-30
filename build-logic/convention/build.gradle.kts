@@ -39,5 +39,9 @@ gradlePlugin {
             id = "finance.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+        register("jvmLibrary") {
+            id = "finance.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }
