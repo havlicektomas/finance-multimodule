@@ -4,13 +4,9 @@ plugins {
 }
 
 android {
-    namespace = "dev.havlicektomas.core.data"
+    namespace = "dev.havlicektomas.core.network"
 }
 
 dependencies {
     implementation(projects.core.domain)
-    implementation(projects.core.database)
-    implementation(projects.core.network)
-
-    implementation(libs.timber)
 }

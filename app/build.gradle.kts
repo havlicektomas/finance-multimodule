@@ -25,6 +25,7 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.data)
     implementation(projects.core.database)
+    implementation(projects.core.network)
 
     implementation(projects.auth.presentation)
     implementation(projects.auth.domain)
@@ -33,7 +34,6 @@ dependencies {
     implementation(projects.finance.presentation)
     implementation(projects.finance.domain)
     implementation(projects.finance.data)
-    implementation(projects.finance.network)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
