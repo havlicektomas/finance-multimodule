@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import dev.havlicektomas.auth.presentation.intro.IntroScreenRoot
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,21 +19,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FinancemultimoduleTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                IntroScreenRoot(
+                    onSignInClick = {},
+                    onSignUpClick = {}
+                )
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
