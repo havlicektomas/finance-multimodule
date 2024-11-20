@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 
@@ -112,7 +113,7 @@ fun FinanceOutlinedActionButton(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun FinanceActionButtonPreview() {
     FinancemultimoduleTheme {
@@ -125,7 +126,7 @@ private fun FinanceActionButtonPreview() {
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun FinanceOutlinedActionButtonPreview() {
     FinancemultimoduleTheme {
