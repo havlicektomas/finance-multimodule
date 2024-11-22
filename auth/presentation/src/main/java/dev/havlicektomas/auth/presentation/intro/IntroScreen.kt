@@ -1,7 +1,5 @@
 package dev.havlicektomas.auth.presentation.intro
 
-import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatDelegate.NightMode
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -22,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.havlicektomas.auth.presentation.R
 import dev.havlicektomas.core.presentation.designsystem.AnalyticsIcon
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceActionButton
@@ -72,19 +68,19 @@ fun IntroScreen(
                     .padding(bottom = 48.dp)
             ) {
                 Text(
-                    text = stringResource(dev.havlicektomas.core.presentation.designsystem.R.string.welcome_message),
+                    text = stringResource(R.string.welcome_message),
                     color = Color.Black,
                     fontSize = 20.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = stringResource(dev.havlicektomas.core.presentation.designsystem.R.string.app_description),
+                    text = stringResource(R.string.app_description),
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.Black,
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 FinanceOutlinedActionButton(
-                    text = stringResource(dev.havlicektomas.core.presentation.designsystem.R.string.sign_in),
+                    text = stringResource(R.string.sign_in),
                     isLoading = false,
                     onClick = {
                         onAction(IntroAction.OnSignInClick)
@@ -94,7 +90,7 @@ fun IntroScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 FinanceActionButton(
-                    text = stringResource(dev.havlicektomas.core.presentation.designsystem.R.string.sign_up),
+                    text = stringResource(R.string.sign_up),
                     isLoading = false,
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {
@@ -122,7 +118,7 @@ private fun VerticalLogo(
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = stringResource(dev.havlicektomas.core.presentation.designsystem.R.string.app_title),
+            text = stringResource(R.string.app_title),
             fontSize = 24.sp,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onBackground

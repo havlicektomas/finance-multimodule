@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_title">Finance</string>
-    <string name="welcome_message">Welcome to Finance app!</string>
-    <string name="app_description">Track your transactions, set goals and achieve milestones with our intuitive app.</string>
-    <string name="sign_up">Sign up</string>
-    <string name="sign_in">Sign in</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
 </resources>
