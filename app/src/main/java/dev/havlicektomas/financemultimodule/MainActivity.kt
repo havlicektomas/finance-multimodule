@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import dev.havlicektomas.auth.presentation.intro.IntroScreenRoot
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 
@@ -19,10 +20,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FinancemultimoduleTheme {
-                IntroScreenRoot(
-                    onSignInClick = {},
-                    onSignUpClick = {}
-                )
+                val navController = rememberNavController()
+                NavigationRoot(navController = navController)
             }
         }
     }
