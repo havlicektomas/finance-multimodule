@@ -25,7 +25,6 @@ fun NavigationRoot(
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     navigation<Route.Auth>(
         startDestination = AuthRoute.Intro
-
     ) {
         composable<AuthRoute.Intro> {
             IntroScreenRoot(

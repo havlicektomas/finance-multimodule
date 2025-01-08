@@ -13,4 +13,5 @@ dependencies {
     implementation(projects.core.data)
 
     implementation(libs.bundles.koin)
+    implementation(project(":core:presentation:ui"))
 }

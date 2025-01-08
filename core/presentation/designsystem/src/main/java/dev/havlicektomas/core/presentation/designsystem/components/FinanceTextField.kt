@@ -14,9 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -43,7 +40,7 @@ import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 
 @Composable
 fun FinanceTextField(
-    state: TextFieldState,
+    state: String,
     startIcon: ImageVector?,
     endIcon: ImageVector?,
     hint: String,
@@ -51,7 +48,8 @@ fun FinanceTextField(
     modifier: Modifier = Modifier,
     error: String? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
-    additionalInfo: String? = null
+    additionalInfo: String? = null,
+    onTextChanged: (String) -> Unit
 ) {
     var isFocused by remember {
         mutableStateOf(false)
@@ -86,15 +84,19 @@ fun FinanceTextField(
             }
         }
         Spacer(modifier = Modifier.height(4.dp))
+
         BasicTextField(
-            state = state,
+            value = state,
+            onValueChange = { newValue: String ->
+                onTextChanged(newValue)
+            },
             textStyle = LocalTextStyle.current.copy(
                 color = MaterialTheme.colorScheme.onBackground
             ),
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType
             ),
-            lineLimits = TextFieldLineLimits.SingleLine,
+            singleLine = true,
             cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
             modifier = Modifier
                 .clip(RoundedCornerShape(16.dp))
@@ -120,7 +122,7 @@ fun FinanceTextField(
                 .onFocusChanged {
                     isFocused = it.isFocused
                 },
-            decorator = { innerBox ->
+            decorationBox = { innerTextField ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -138,7 +140,7 @@ fun FinanceTextField(
                         modifier = Modifier
                             .weight(1f)
                     ) {
-                        if(state.text.isEmpty() && !isFocused) {
+                        if(state.isEmpty() && !isFocused) {
                             Text(
                                 text = hint,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
@@ -147,7 +149,7 @@ fun FinanceTextField(
                                 modifier = Modifier.fillMaxWidth()
                             )
                         }
-                        innerBox()
+                        innerTextField()
                     }
                     if(endIcon != null) {
                         Spacer(modifier = Modifier.width(16.dp))
@@ -170,14 +172,15 @@ fun FinanceTextField(
 private fun FinanceTextFieldPreview() {
     FinancemultimoduleTheme {
         FinanceTextField(
-            state = rememberTextFieldState(),
+            state = "",
             startIcon = EmailIcon,
             endIcon = CheckIcon,
             hint = "example@test.com",
             title = "Email",
             additionalInfo = "Must be a valid email",
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            onTextChanged = {}
         )
     }
 }

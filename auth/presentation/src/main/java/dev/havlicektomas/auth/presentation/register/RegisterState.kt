@@ -4,7 +4,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import dev.havlicektomas.auth.domain.PasswordValidationState
 
 data class RegisterState(
-    val email: TextFieldState = TextFieldState(),
+    val email: String = "",
     val isEmailValid: Boolean = false,
     val password: TextFieldState = TextFieldState(),
     val isPasswordVisible: Boolean = false,

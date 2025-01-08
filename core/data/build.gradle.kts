@@ -9,8 +9,7 @@ android {
 
 dependencies {
     implementation(projects.core.domain)
-    implementation(projects.core.database)
-    implementation(projects.core.network)
 
     implementation(libs.timber)
+    implementation(libs.bundles.koin)
 }

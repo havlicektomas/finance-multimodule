@@ -1,5 +1,6 @@
 package dev.havlicektomas.auth.presentation.register
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,6 +19,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -38,6 +41,7 @@ import dev.havlicektomas.core.presentation.designsystem.Poppins
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceActionButton
 import dev.havlicektomas.core.presentation.designsystem.components.FinancePasswordTextField
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceTextField
+import dev.havlicektomas.core.presentation.ui.ObserveAsEvents
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -46,6 +50,31 @@ fun RegisterScreenRoot(
     onSuccessfulRegistration: () -> Unit,
     viewModel: RegisterViewModel = koinViewModel(),
 ) {
+    val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when(event) {
+            is RegisterEvent.Error -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    event.error.asString(context),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            RegisterEvent.RegistrationSuccess -> {
+                keyboardController?.hide()
+                Toast.makeText(
+                    context,
+                    R.string.registration_successful,
+                    Toast.LENGTH_LONG
+                ).show()
+                onSuccessfulRegistration()
+            }
+        }
+    }
+
     RegisterScreen(
         state = viewModel.state,
         onAction = viewModel::onAction
@@ -117,7 +146,10 @@ private fun RegisterScreen(
                 title = stringResource(id = R.string.email),
                 modifier = Modifier.fillMaxWidth(),
                 additionalInfo = stringResource(id = R.string.must_be_a_valid_email),
-                keyboardType = KeyboardType.Email
+                keyboardType = KeyboardType.Email,
+                onTextChanged = { email ->
+                    onAction(RegisterAction.OnEmailChange(email))
+                }
             )
             Spacer(modifier = Modifier.height(16.dp))
             FinancePasswordTextField(
