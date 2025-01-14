@@ -1,10 +1,28 @@
 package dev.havlicektomas.core.data.di
 
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import dev.havlicektomas.core.data.auth.EncryptedSessionStorage
 import dev.havlicektomas.core.data.networking.HttpClientFactory
+import dev.havlicektomas.core.domain.SessionStorage
+import org.koin.android.ext.koin.androidApplication
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val coreDataModule = module {
     single {
-        HttpClientFactory().build()
+        HttpClientFactory(get()).build()
     }
+    single<SharedPreferences> {
+        EncryptedSharedPreferences(
+            androidApplication(),
+            "auth_pref",
+            MasterKey(androidApplication()),
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+    singleOf(::EncryptedSessionStorage).bind<SessionStorage>()
 }
