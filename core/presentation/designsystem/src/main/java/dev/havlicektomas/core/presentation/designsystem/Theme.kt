@@ -15,7 +15,7 @@ val LightColorScheme = lightColorScheme(
     error = FinanceRed40,
     primaryContainer = FinanceGreen90,
     onPrimary = FinanceWhite,
-    onBackground = FinanceWhite,
+    onBackground = FinanceBlack,
     onSurface = FinanceGray10,
     onSurfaceVariant = FinanceGrayVariant30
 )
@@ -29,7 +29,7 @@ val DarkColorScheme = darkColorScheme(
     error = FinanceRed80,
     primaryContainer = FinanceGreen30,
     onPrimary = FinanceBlack,
-    onBackground = FinanceBlack,
+    onBackground = FinanceWhite,
     onSurface = FinanceGray90,
     onSurfaceVariant = FinanceGrayVariant90
 )
