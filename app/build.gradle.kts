@@ -44,9 +44,14 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
 
+    // Koin
     implementation(libs.bundles.koin)
 
+    // Timber
     implementation(libs.timber)
+
+    // Splash screen
+    implementation(libs.androidx.core.splashscreen)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

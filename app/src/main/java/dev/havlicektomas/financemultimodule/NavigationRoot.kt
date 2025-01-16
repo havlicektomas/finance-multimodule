@@ -8,17 +8,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import dev.havlicektomas.auth.presentation.intro.IntroScreenRoot
+import dev.havlicektomas.auth.presentation.login.LoginScreenRoot
 import dev.havlicektomas.auth.presentation.register.RegisterScreenRoot
 
 @Composable
 fun NavigationRoot(
     navController: NavHostController,
+    isLoggedIn: Boolean
 ) {
     NavHost(
         navController = navController,
-        startDestination = Route.Auth
+        startDestination = if (isLoggedIn) Route.Finance else Route.Auth
     ) {
         authGraph(navController)
+        financeGraph(navController)
     }
 }
 
@@ -53,7 +56,34 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             )
         }
         composable<AuthRoute.Login> {
-            Text(text = "Login")
+            LoginScreenRoot(
+                onSignUpClick = {
+                    navController.navigate(AuthRoute.Register) {
+                        popUpTo(AuthRoute.Login) {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                },
+                onLoginSuccess = {
+                    navController.navigate(Route.Finance) {
+                        popUpTo(Route.Auth) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+    }
+}
+
+private fun NavGraphBuilder.financeGraph(navController: NavHostController) {
+    navigation<Route.Finance>(
+        startDestination = FinanceRoute.Overview
+    ) {
+        composable<FinanceRoute.Overview> {
+            Text("Overview")
         }
     }
 }

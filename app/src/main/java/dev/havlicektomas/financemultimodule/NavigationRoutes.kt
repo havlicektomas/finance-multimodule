@@ -5,6 +5,9 @@ import kotlinx.serialization.Serializable
 sealed interface Route {
     @Serializable
     data object Auth: Route
+
+    @Serializable
+    data object Finance: Route
 }
 
 sealed interface AuthRoute {
@@ -16,4 +19,9 @@ sealed interface AuthRoute {
 
     @Serializable
     data object Register: AuthRoute
+}
+
+sealed interface FinanceRoute {
+    @Serializable
+    data object Overview: FinanceRoute
 }
