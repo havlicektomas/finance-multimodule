@@ -36,8 +36,8 @@ junit5-plugin = "1.10.0.0"
 junit5-compose = "1.4.0"
 mockk = "1.13.11"
 assertk = "0.28.1"
-turbine = "0.7.0"
-coroutines-test = "1.8.1"
+turbine = "1.1.0"
+coroutines-test = "1.10.1"
 
 # Project versions
 projectApplicationId = "dev.havlicektomas.financemultimodule"
@@ -155,5 +155,6 @@ ktor = [
     "ktor-client-content-negotiation",
     "ktor-client-core",
     "ktor-client-logging",
-    "ktor-serialization-kotlinx-json"
+    "ktor-serialization-kotlinx-json",
+    "ktor-client-mock"
 ]

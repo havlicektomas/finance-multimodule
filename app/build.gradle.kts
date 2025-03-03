@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.finance.android.application.compose)
     alias(libs.plugins.finance.jvm.ktor)
+    alias(libs.plugins.finance.android.junit5)
 }
 
 android {
@@ -24,6 +25,8 @@ dependencies {
     implementation(projects.core.presentation.ui)
     implementation(projects.core.domain)
     implementation(projects.core.data)
+    androidTestImplementation(projects.core.test)
+    androidTestImplementation(projects.core.androidTest)
 
     implementation(projects.auth.presentation)
     implementation(projects.auth.domain)
