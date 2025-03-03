@@ -6,6 +6,7 @@ import androidx.security.crypto.MasterKey
 import dev.havlicektomas.core.data.auth.EncryptedSessionStorage
 import dev.havlicektomas.core.data.networking.HttpClientFactory
 import dev.havlicektomas.core.domain.SessionStorage
+import io.ktor.client.engine.cio.CIO
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -13,7 +14,7 @@ import org.koin.dsl.module
 
 val coreDataModule = module {
     single {
-        HttpClientFactory(get()).build()
+        HttpClientFactory(get()).build(CIO.create())
     }
     single<SharedPreferences> {
         EncryptedSharedPreferences(
