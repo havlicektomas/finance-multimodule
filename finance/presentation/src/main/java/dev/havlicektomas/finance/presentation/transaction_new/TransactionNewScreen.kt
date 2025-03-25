@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,6 +18,7 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -29,23 +32,33 @@ import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceActionButton
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceAppBar
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceAppBarAction
+import dev.havlicektomas.core.presentation.designsystem.components.FinanceBasicTextField
+import dev.havlicektomas.core.presentation.designsystem.components.FinanceDropDown
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceScaffold
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceUnitTextField
+import dev.havlicektomas.finance.presentation.transaction_overview.TransactionOverviewAction
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TransactionNewScreenRoot(
-    viewModel: TransactionNewViewModel = koinViewModel()
+    viewModel: TransactionNewViewModel = koinViewModel(),
+    onNavigateBack: () -> Unit
 ) {
     TransactionNewScreen(
-        state = viewModel.state
+        onAction = { action ->
+            if (action is TransactionNewAction.OnBackClick) {
+                onNavigateBack()
+            } else {
+                viewModel.onAction(action)
+            }
+        }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionNewScreen(
-    state: TransactionNewState
+    onAction: (TransactionNewAction) -> Unit
 ) {
     FinanceScaffold(
         topAppBar = {
@@ -56,22 +69,52 @@ fun TransactionNewScreen(
                     FinanceAppBarAction(
                         label = "Close",
                         icon = Icons.Default.Close,
-                        onActionClick = {}
+                        onActionClick = {
+                            onAction(TransactionNewAction.OnBackClick)
+                        }
                     )
                 ),
-                onBackClick = {},
+                onBackClick = {
+                    onAction(TransactionNewAction.OnBackClick)
+                },
             )
+        },
+        bottomBar = {
+            FinanceActionButton(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .padding(bottom = 16.dp),
+                text = "Create",
+                isLoading = false,
+                enabled = true
+            ) { }
         }
     ) { innerPadding ->
 
+        var categoryMenuExpanded by remember { mutableStateOf(false) }
+
+        // TODO: Replace by TransactionNewState - transaction title
+        var testTitle by remember { mutableStateOf("") }
+
+        // TODO: Replace by TransactionNewState - transaction note
+        var testNote by remember { mutableStateOf("") }
+
+        // TODO: Replace by TransactionNewState - transaction amount
         var testAmount by remember { mutableStateOf("00.00") }
-        var selectedIndex by remember { mutableStateOf(0) }
-        val options = listOf("Expense", "Income")
+
+        // TODO: Replace by TransactionNewState - transaction type
+        var selectedType by remember { mutableIntStateOf(0) }
+        val types = listOf("Expense", "Income")
+
+        // TODO: Replace by TransactionNewState - transaction category
+        var selectedCategory by remember { mutableStateOf("Other") }
+        val categories = listOf("Clothing", "Education", "Entertainment", "Food", "Health", "Other")
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SingleChoiceSegmentedButtonRow(
@@ -79,56 +122,72 @@ fun TransactionNewScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                options. forEachIndexed { index, label ->
+                types. forEachIndexed { index, label ->
                     SegmentedButton(
                         shape = SegmentedButtonDefaults.itemShape(
                             index = index,
-                            count = options.size
+                            count = types.size
                         ),
                         colors = SegmentedButtonDefaults.colors(
                             activeContainerColor = MaterialTheme.colorScheme.primaryContainer
                         ),
-                        onClick = { selectedIndex = index },
-                        selected = index == selectedIndex) {
+                        onClick = { selectedType = index },
+                        selected = index == selectedType) {
                             Text(label)
                         }
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
             Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(top = 48.dp),
+                modifier = Modifier.padding(top = 48.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = "+ Add Title",
-                    fontSize = 14.sp
+                FinanceBasicTextField(
+                    value = testTitle,
+                    onValueChange = { testTitle = it },
+                    hint = "+ Add Title",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontSize = 14.sp,
+                    keyboardType = KeyboardType.Text
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 FinanceUnitTextField(
                     value = testAmount,
                     onValueChange = { testAmount = it },
-                    unit = "$",
+                    unit = if (selectedType == 0) "-$" else "$",
                     keyboardType = KeyboardType.Decimal,
                     fontSize = 36.sp,
                     color = MaterialTheme.colorScheme.onBackground,
-                    unitColor = MaterialTheme.colorScheme.primary
+                    unitColor = if (selectedType == 0) {
+                        MaterialTheme.colorScheme.error
+                    } else {
+                        MaterialTheme.colorScheme.primary
+                    }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "+ Add Note",
-                    fontSize = 14.sp
+                FinanceBasicTextField(
+                    value = testNote,
+                    onValueChange = { testNote = it },
+                    hint = "+ Add Note",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontSize = 14.sp,
+                    keyboardType = KeyboardType.Text
+                )
+                Spacer(modifier = Modifier.height(72.dp))
+                FinanceDropDown(
+                    expanded = categoryMenuExpanded,
+                    onDropdownMenuItemClicked = { item ->
+                        selectedCategory = item
+                        categoryMenuExpanded = false
+                    },
+                    onDropdownMenuClicked = {
+                        categoryMenuExpanded = !categoryMenuExpanded
+                    },
+                    items = categories,
+                    selectedItem = selectedCategory
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
-            FinanceActionButton(
-                modifier = Modifier
-                    .padding(16.dp),
-                text = "Create",
-                isLoading = false,
-                enabled = true
-            ) { }
         }
     }
 }
@@ -138,7 +197,7 @@ fun TransactionNewScreen(
 private fun TransactionNewScreenPreview() {
     FinancemultimoduleTheme {
         TransactionNewScreen(
-            state = TransactionNewState()
+            onAction = {}
         )
     }
 }

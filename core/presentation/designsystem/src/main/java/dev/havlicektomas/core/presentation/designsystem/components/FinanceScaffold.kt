@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 fun FinanceScaffold(
     modifier: Modifier = Modifier,
     topAppBar: @Composable () -> Unit = {},
+    bottomBar: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     containerColor: Color = MaterialTheme.colorScheme.background,
     content: @Composable (PaddingValues) -> Unit
@@ -21,7 +22,8 @@ fun FinanceScaffold(
         topBar = topAppBar,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = FabPosition.End,
-        containerColor = containerColor
+        containerColor = containerColor,
+        bottomBar = bottomBar
     ) { innerPadding ->
         content(innerPadding)
     }
