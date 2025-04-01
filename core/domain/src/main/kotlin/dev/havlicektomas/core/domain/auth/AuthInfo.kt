@@ -1,4 +1,4 @@
-package dev.havlicektomas.core.domain
+package dev.havlicektomas.core.domain.auth
 
 data class AuthInfo(
     val accessToken: String,

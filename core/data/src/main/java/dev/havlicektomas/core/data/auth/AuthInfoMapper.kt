@@ -1,6 +1,6 @@
 package dev.havlicektomas.core.data.auth
 
-import dev.havlicektomas.core.domain.AuthInfo
+import dev.havlicektomas.core.domain.auth.AuthInfo
 
 fun AuthInfo.toAuthInfoSerializable(): AuthInfoSerializable {
     return AuthInfoSerializable(

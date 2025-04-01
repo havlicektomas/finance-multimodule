@@ -1,4 +1,4 @@
-package dev.havlicektomas.core.domain
+package dev.havlicektomas.core.domain.auth
 
 interface SessionStorage {
     suspend fun get(): AuthInfo?
