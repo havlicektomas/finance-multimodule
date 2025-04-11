@@ -14,8 +14,11 @@ import dev.havlicektomas.finance.domain.TransactionRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.ZonedDateTime
 import kotlin.uuid.ExperimentalUuidApi
 
+@OptIn(ExperimentalUuidApi::class)
 class TransactionNewViewModel(
     private val repository: TransactionRepository
 ): ViewModel() {
@@ -26,7 +29,6 @@ class TransactionNewViewModel(
     private val eventChannel = Channel<TransactionNewEvent>()
     val events = eventChannel.receiveAsFlow()
 
-    @OptIn(ExperimentalUuidApi::class)
     fun onAction(action: TransactionNewAction) {
         when (action) {
             TransactionNewAction.OnBackClick -> {
@@ -80,6 +82,12 @@ class TransactionNewViewModel(
     }
 
     private fun createTransaction() {
+        state = state.copy(
+            transaction = state.transaction.copy(
+                timestamp = ZonedDateTime.now()
+            )
+        )
+
         viewModelScope.launch {
             state = state.copy(isSavingTransaction = true)
             val result = repository.createTransaction(state.transaction)

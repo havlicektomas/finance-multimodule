@@ -20,7 +20,7 @@ class FakeAuthRepositoryImpl(
             AuthInfo(
                 accessToken = "test-access-token",
                 refreshToken = "test-refresh-token",
-                userId = "testUserId"
+                userId = email
             )
         )
         return Result.Success(Unit).asEmptyDataResult()

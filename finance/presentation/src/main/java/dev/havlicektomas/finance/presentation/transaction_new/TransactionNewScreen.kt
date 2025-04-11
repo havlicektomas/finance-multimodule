@@ -34,8 +34,6 @@ import androidx.compose.ui.unit.sp
 import dev.havlicektomas.core.domain.finance.FinanceTransaction
 import dev.havlicektomas.core.domain.finance.FinanceTransactionCategory
 import dev.havlicektomas.core.domain.finance.FinanceTransactionType
-import dev.havlicektomas.core.domain.finance.getTransactionCategories
-import dev.havlicektomas.core.domain.finance.getTransactionCategory
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceActionButton
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceAppBar
@@ -46,6 +44,8 @@ import dev.havlicektomas.core.presentation.designsystem.components.FinanceScaffo
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceUnitTextField
 import dev.havlicektomas.core.presentation.ui.ObserveAsEvents
 import dev.havlicektomas.finance.presentation.R
+import dev.havlicektomas.finance.presentation.util.getTransactionCategories
+import dev.havlicektomas.finance.presentation.util.getTransactionCategory
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -207,7 +207,9 @@ fun TransactionNewScreen(
                 FinanceDropDown(
                     expanded = categoryMenuExpanded,
                     onDropdownMenuItemClicked = { item ->
-                        onAction(TransactionNewAction.OnTransactionCategorySelected(getTransactionCategory(item)))
+                        onAction(TransactionNewAction.OnTransactionCategorySelected(
+                            getTransactionCategory(item)
+                        ))
                         categoryMenuExpanded = false
                     },
                     onDropdownMenuClicked = {

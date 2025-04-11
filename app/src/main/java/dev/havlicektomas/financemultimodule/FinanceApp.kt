@@ -5,8 +5,7 @@ import dev.havlicektomas.auth.data.di.authDataModule
 import dev.havlicektomas.auth.presentation.di.authViewModelModule
 import dev.havlicektomas.core.data.di.coreDataModule
 import dev.havlicektomas.finance.data.di.financeDataModule
-import dev.havlicektomas.finance.presentation.transaction_new.di.transactionNewViewModelModule
-import dev.havlicektomas.finance.presentation.transaction_overview.di.transactionOverviewViewModelModule
+import dev.havlicektomas.finance.presentation.di.financePresentationModule
 import dev.havlicektomas.financemultimodule.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -30,8 +29,7 @@ class FinanceApp: Application() {
                 authViewModelModule,
                 appModule,
                 coreDataModule,
-                transactionOverviewViewModelModule,
-                transactionNewViewModelModule,
+                financePresentationModule,
                 financeDataModule
             )
         }

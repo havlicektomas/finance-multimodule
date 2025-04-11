@@ -169,8 +169,8 @@ fun FinanceTextField2(
 @Composable
 private fun FinanceTextFieldPreview() {
     FinancemultimoduleTheme {
-        FinanceTextField(
-            state = "",
+        FinanceTextField2(
+            state = TextFieldState(initialText = ""),
             startIcon = EmailIcon,
             endIcon = CheckIcon,
             hint = "example@test.com",
@@ -178,7 +178,6 @@ private fun FinanceTextFieldPreview() {
             additionalInfo = "Must be a valid email",
             modifier = Modifier
                 .fillMaxWidth(),
-            onTextChanged = {}
         )
     }
 }
