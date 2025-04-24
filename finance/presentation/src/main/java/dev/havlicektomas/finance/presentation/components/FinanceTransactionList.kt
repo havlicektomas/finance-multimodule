@@ -1,4 +1,4 @@
-package dev.havlicektomas.core.presentation.designsystem.components
+package dev.havlicektomas.finance.presentation.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,15 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import dev.havlicektomas.core.domain.finance.FinanceTransaction
+import androidx.compose.ui.unit.sp
 import dev.havlicektomas.core.domain.finance.FinanceTransactionCategory
 import dev.havlicektomas.core.domain.finance.FinanceTransactionType
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
-
-data class TransactionsPerDay(
-    val date: String,
-    val transactions: List<FinanceTransaction>
-)
+import dev.havlicektomas.finance.presentation.model.TransactionsPerDay
+import dev.havlicektomas.finance.presentation.model.UITransaction
 
 @Composable
 fun FinanceTransactionList(
@@ -29,15 +26,16 @@ fun FinanceTransactionList(
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(16.dp)
+        contentPadding = PaddingValues(horizontal = 16.dp)
     ) {
         labeledTransactions.forEach { transactionsPerDay ->
             item {
                 Text(
                     text = transactionsPerDay.date,
+                    fontSize = 12.sp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 24.dp)
+                        .padding(vertical = 16.dp)
                 )
             }
             items(transactionsPerDay.transactions) { transaction ->
@@ -52,7 +50,6 @@ fun FinanceTransactionList(
     }
 }
 
-@OptIn(kotlin. uuid. ExperimentalUuidApi::class)
 @PreviewLightDark
 @Composable
 private fun FinanceTransactionListPreview() {
@@ -66,45 +63,55 @@ private fun FinanceTransactionListPreview() {
                     TransactionsPerDay(
                         date = "Today",
                         transactions = listOf(
-                            FinanceTransaction(
+                            UITransaction(
                                 type = FinanceTransactionType.EXPENSE,
-                                amount = 158.25,
+                                amount = "158.25",
                                 title = "Test",
                                 note = "",
-                                category = FinanceTransactionCategory.OTHER
+                                category = FinanceTransactionCategory.OTHER,
+                                id = "",
+                                timestamp = ""
                             ),
-                            FinanceTransaction(
+                            UITransaction(
                                 type = FinanceTransactionType.INCOME,
-                                amount = 158.25,
+                                amount = "158.25",
                                 title = "Test",
                                 note = "",
-                                category = FinanceTransactionCategory.OTHER
+                                category = FinanceTransactionCategory.OTHER,
+                                id = "",
+                                timestamp = ""
                             ),
-                            FinanceTransaction(
+                            UITransaction(
                                 type = FinanceTransactionType.EXPENSE,
-                                amount = 158.25,
+                                amount = "158.25",
                                 title = "Test",
                                 note = "",
-                                category = FinanceTransactionCategory.OTHER
+                                category = FinanceTransactionCategory.OTHER,
+                                id = "",
+                                timestamp = ""
                             )
                         )
                     ),
                     TransactionsPerDay(
                         date = "Yesterday",
                         transactions = listOf(
-                            FinanceTransaction(
+                            UITransaction(
                                 type = FinanceTransactionType.EXPENSE,
-                                amount = 158.25,
+                                amount = "158.25",
                                 title = "Test",
                                 note = "",
-                                category = FinanceTransactionCategory.OTHER
+                                category = FinanceTransactionCategory.OTHER,
+                                id = "",
+                                timestamp = ""
                             ),
-                            FinanceTransaction(
+                            UITransaction(
                                 type = FinanceTransactionType.INCOME,
-                                amount = 158.25,
+                                amount = "158.25",
                                 title = "Test",
                                 note = "",
-                                category = FinanceTransactionCategory.OTHER
+                                category = FinanceTransactionCategory.OTHER,
+                                id = "",
+                                timestamp = ""
                             )
                         )
                     )

@@ -7,6 +7,8 @@ import dev.havlicektomas.core.domain.util.Result
 import dev.havlicektomas.core.domain.util.asEmptyDataResult
 import dev.havlicektomas.finance.domain.TransactionRepository
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlin.time.Duration.Companion.seconds
 
 class TransactionRepositoryImpl(): TransactionRepository {
@@ -21,5 +23,11 @@ class TransactionRepositoryImpl(): TransactionRepository {
 
     override suspend fun getTransactions(): Result<List<FinanceTransaction>, DataError.Network> {
         return Result.Success(transactions.toList())
+    }
+
+    override fun transactionsFlow(): Flow<List<FinanceTransaction>> {
+        return flow {
+            emit(transactions.toList())
+        }
     }
 }

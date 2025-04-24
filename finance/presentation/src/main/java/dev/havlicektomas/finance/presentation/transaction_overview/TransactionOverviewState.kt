@@ -1,13 +1,13 @@
 package dev.havlicektomas.finance.presentation.transaction_overview
 
-import dev.havlicektomas.core.presentation.designsystem.components.TransactionsPerDay
+import dev.havlicektomas.finance.presentation.model.TransactionsPerDay
 
 data class TransactionOverviewState(
     val username: String = "",
-    val accountBalance: Double = 0.0,
-    val largestTransactionAmount: Double = 0.0,
+    val accountBalance: String = "",
+    val largestTransactionAmount: String = "",
     val largestTransactionDate: String = "",
     val largestTransactionTitle: String = "",
-    val thisWeekSum: Double = 0.0,
+    val thisWeekSum: String = "",
     val latestTransactions: List<TransactionsPerDay> = emptyList()
 )

@@ -1,4 +1,4 @@
-package dev.havlicektomas.core.presentation.designsystem.components
+package dev.havlicektomas.finance.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,17 +16,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.havlicektomas.core.domain.finance.FinanceTransaction
 import dev.havlicektomas.core.domain.finance.FinanceTransactionCategory
 import dev.havlicektomas.core.domain.finance.FinanceTransactionType
 import dev.havlicektomas.core.presentation.designsystem.ArrowLeftIcon
 import dev.havlicektomas.core.presentation.designsystem.ArrowRightIcon
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
+import dev.havlicektomas.finance.presentation.model.UITransaction
+import kotlin.uuid.ExperimentalUuidApi
 
 @Composable
 fun FinanceTransactionListItem(
     modifier: Modifier = Modifier,
-    transaction: FinanceTransaction
+    transaction: UITransaction
 ) {
     Row(
         modifier = modifier
@@ -84,7 +85,7 @@ fun FinanceTransactionListItem(
     }
 }
 
-@OptIn(kotlin. uuid. ExperimentalUuidApi::class)
+@OptIn(ExperimentalUuidApi::class)
 @PreviewLightDark
 @Composable
 private fun TransactionListItemExpensePreview() {
@@ -97,19 +98,21 @@ private fun TransactionListItemExpensePreview() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                transaction = FinanceTransaction(
+                transaction = UITransaction(
                     type = FinanceTransactionType.EXPENSE,
-                    amount = 158.25,
+                    amount = "158.25",
                     title = "Test",
                     note = "Test note",
-                    category = FinanceTransactionCategory.OTHER
+                    category = FinanceTransactionCategory.OTHER,
+                    id = "",
+                    timestamp = ""
                 )
             )
         }
     }
 }
 
-@OptIn(kotlin. uuid. ExperimentalUuidApi::class)
+@OptIn(ExperimentalUuidApi::class)
 @PreviewLightDark
 @Composable
 private fun TransactionListItemIncomePreview() {
@@ -122,12 +125,14 @@ private fun TransactionListItemIncomePreview() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                transaction = FinanceTransaction(
+                transaction = UITransaction(
                     type = FinanceTransactionType.INCOME,
-                    amount = 158.25,
+                    amount = "158.25",
                     title = "Test",
                     note = "Test note",
-                    category = FinanceTransactionCategory.OTHER
+                    category = FinanceTransactionCategory.OTHER,
+                    id = "",
+                    timestamp = ""
                 )
             )
         }

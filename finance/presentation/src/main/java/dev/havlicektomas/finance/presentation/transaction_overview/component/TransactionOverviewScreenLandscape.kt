@@ -24,10 +24,10 @@ fun TransactionOverviewScreenLandscape(
         TransactionOverViewHeader(
             modifier = Modifier
                 .weight(2f),
-            accountBalance = "$${state.accountBalance}",
-            thisWeekTransactionSum = "$${state.thisWeekSum}",
+            accountBalance = state.accountBalance,
+            thisWeekTransactionSum = state.thisWeekSum,
             largestTransactionTitle = state.largestTransactionTitle,
-            largestTransactionAmount = "$${state.largestTransactionAmount}",
+            largestTransactionAmount = state.largestTransactionAmount,
             largestTransactionDate = state.largestTransactionDate
         )
         Box(

@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 
@@ -61,7 +60,7 @@ fun FinanceDropDown(
                 .padding(horizontal = 24.dp),
             expanded = expanded,
             onDismissRequest = onDropdownMenuClicked,
-            containerColor = Color.Transparent,
+            containerColor = MaterialTheme.colorScheme.background,
             properties = PopupProperties()
         ) {
             items.forEach { item ->

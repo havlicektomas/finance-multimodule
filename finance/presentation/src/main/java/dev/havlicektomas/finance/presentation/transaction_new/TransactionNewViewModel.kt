@@ -3,22 +3,17 @@ package dev.havlicektomas.finance.presentation.transaction_new
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.havlicektomas.core.domain.finance.FinanceTransaction
-import dev.havlicektomas.core.domain.util.DataError
 import dev.havlicektomas.core.domain.util.Result
-import dev.havlicektomas.core.presentation.ui.UiText
 import dev.havlicektomas.core.presentation.ui.asUiText
 import dev.havlicektomas.finance.domain.TransactionRepository
+import dev.havlicektomas.finance.presentation.mapper.toDomainTransaction
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.ZonedDateTime
-import kotlin.uuid.ExperimentalUuidApi
 
-@OptIn(ExperimentalUuidApi::class)
 class TransactionNewViewModel(
     private val repository: TransactionRepository
 ): ViewModel() {
@@ -43,7 +38,7 @@ class TransactionNewViewModel(
                 )
                 state = state.copy(
                     transaction = newTransaction,
-                    canCreateTransaction = isValidTransaction(newTransaction)
+                    canCreateTransaction = isValidTransaction(action.amount)
                 )
             }
             is TransactionNewAction.OnTransactionCategorySelected -> {
@@ -77,20 +72,16 @@ class TransactionNewViewModel(
         }
     }
 
-    private fun isValidTransaction(transaction: FinanceTransaction): Boolean {
-        return transaction.amount > 0.0
+    private fun isValidTransaction(amount: String): Boolean {
+        return amount.isDigitsOnly() && amount.toDouble() > 0.0
     }
 
     private fun createTransaction() {
-        state = state.copy(
-            transaction = state.transaction.copy(
-                timestamp = ZonedDateTime.now()
-            )
-        )
+        val transaction = state.transaction.toDomainTransaction()
 
         viewModelScope.launch {
             state = state.copy(isSavingTransaction = true)
-            val result = repository.createTransaction(state.transaction)
+            val result = repository.createTransaction(transaction)
             state = state.copy(isSavingTransaction = false)
 
             when(result) {

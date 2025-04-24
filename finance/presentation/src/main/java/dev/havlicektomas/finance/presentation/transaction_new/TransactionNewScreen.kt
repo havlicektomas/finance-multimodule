@@ -31,7 +31,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.havlicektomas.core.domain.finance.FinanceTransaction
 import dev.havlicektomas.core.domain.finance.FinanceTransactionCategory
 import dev.havlicektomas.core.domain.finance.FinanceTransactionType
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
@@ -44,6 +43,7 @@ import dev.havlicektomas.core.presentation.designsystem.components.FinanceScaffo
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceUnitTextField
 import dev.havlicektomas.core.presentation.ui.ObserveAsEvents
 import dev.havlicektomas.finance.presentation.R
+import dev.havlicektomas.finance.presentation.model.UITransaction
 import dev.havlicektomas.finance.presentation.util.getTransactionCategories
 import dev.havlicektomas.finance.presentation.util.getTransactionCategory
 import org.koin.androidx.compose.koinViewModel
@@ -178,9 +178,9 @@ fun TransactionNewScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 FinanceUnitTextField(
-                    value = state.transaction.amount.toString(),
+                    value = state.transaction.amount,
                     onValueChange = {
-                        onAction(TransactionNewAction.OnTransactionAmountChanged(it.toDouble()))
+                        onAction(TransactionNewAction.OnTransactionAmountChanged(it))
                     },
                     unit = if (state.transaction.type == FinanceTransactionType.EXPENSE) "-$" else "$",
                     keyboardType = KeyboardType.Decimal,
@@ -224,17 +224,16 @@ fun TransactionNewScreen(
     }
 }
 
-@OptIn(kotlin. uuid. ExperimentalUuidApi::class)
 @PreviewLightDark
 @Composable
 private fun TransactionNewScreenPreview() {
     FinancemultimoduleTheme {
         TransactionNewScreen(
             state = TransactionNewState(
-                transaction = FinanceTransaction(
+                transaction = UITransaction(
                     type = FinanceTransactionType.EXPENSE,
-                    amount = 158.25,
-                    title = "Test",
+                    amount = "158.25",
+                    title = "Test title",
                     note = "Test note",
                     category = FinanceTransactionCategory.OTHER
                 )
