@@ -63,3 +63,7 @@ val LogoutIcon: ImageVector
 val PersonIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.person)
+
+val WalletIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.wallet)

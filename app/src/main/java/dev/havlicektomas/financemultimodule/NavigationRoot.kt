@@ -1,6 +1,5 @@
 package dev.havlicektomas.financemultimodule
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,6 +9,9 @@ import androidx.navigation.navigation
 import dev.havlicektomas.auth.presentation.intro.IntroScreenRoot
 import dev.havlicektomas.auth.presentation.login.LoginScreenRoot
 import dev.havlicektomas.auth.presentation.register.RegisterScreenRoot
+import dev.havlicektomas.finance.presentation.transaction_new.TransactionNewScreen
+import dev.havlicektomas.finance.presentation.transaction_new.TransactionNewScreenRoot
+import dev.havlicektomas.finance.presentation.transaction_overview.TransactionOverviewScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -83,7 +85,18 @@ private fun NavGraphBuilder.financeGraph(navController: NavHostController) {
         startDestination = FinanceRoute.Overview
     ) {
         composable<FinanceRoute.Overview> {
-            Text("Overview")
+            TransactionOverviewScreenRoot(
+                onNewTransactionClick = {
+                    navController.navigate(FinanceRoute.TransactionNew)
+                }
+            )
+        }
+        composable<FinanceRoute.TransactionNew> {
+            TransactionNewScreenRoot(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

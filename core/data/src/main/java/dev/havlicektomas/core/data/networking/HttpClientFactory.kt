@@ -1,8 +1,8 @@
 package dev.havlicektomas.core.data.networking
 
 import dev.havlicektomas.core.data.BuildConfig
-import dev.havlicektomas.core.domain.AuthInfo
-import dev.havlicektomas.core.domain.SessionStorage
+import dev.havlicektomas.core.domain.auth.AuthInfo
+import dev.havlicektomas.core.domain.auth.SessionStorage
 import dev.havlicektomas.core.domain.util.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine

@@ -1,8 +1,8 @@
 package dev.havlicektomas.auth.data
 
 import dev.havlicektomas.auth.domain.AuthRepository
-import dev.havlicektomas.core.domain.AuthInfo
-import dev.havlicektomas.core.domain.SessionStorage
+import dev.havlicektomas.core.domain.auth.AuthInfo
+import dev.havlicektomas.core.domain.auth.SessionStorage
 import dev.havlicektomas.core.domain.util.DataError
 import dev.havlicektomas.core.domain.util.EmptyResult
 import dev.havlicektomas.core.domain.util.Result
@@ -20,7 +20,7 @@ class FakeAuthRepositoryImpl(
             AuthInfo(
                 accessToken = "test-access-token",
                 refreshToken = "test-refresh-token",
-                userId = "testUserId"
+                userId = email
             )
         )
         return Result.Success(Unit).asEmptyDataResult()

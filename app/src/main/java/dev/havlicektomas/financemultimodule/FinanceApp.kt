@@ -4,6 +4,8 @@ import android.app.Application
 import dev.havlicektomas.auth.data.di.authDataModule
 import dev.havlicektomas.auth.presentation.di.authViewModelModule
 import dev.havlicektomas.core.data.di.coreDataModule
+import dev.havlicektomas.finance.data.di.financeDataModule
+import dev.havlicektomas.finance.presentation.di.financePresentationModule
 import dev.havlicektomas.financemultimodule.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,7 +28,9 @@ class FinanceApp: Application() {
                 authDataModule,
                 authViewModelModule,
                 appModule,
-                coreDataModule
+                coreDataModule,
+                financePresentationModule,
+                financeDataModule
             )
         }
     }

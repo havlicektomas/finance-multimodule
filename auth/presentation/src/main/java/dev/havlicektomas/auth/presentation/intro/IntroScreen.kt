@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import dev.havlicektomas.auth.presentation.R
 import dev.havlicektomas.core.presentation.designsystem.AnalyticsIcon
 import dev.havlicektomas.core.presentation.designsystem.FinancemultimoduleTheme
+import dev.havlicektomas.core.presentation.designsystem.WalletIcon
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceActionButton
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceOutlinedActionButton
 
@@ -112,7 +113,7 @@ private fun VerticalLogo(
     ) {
         Icon(
             modifier = Modifier.size(48.dp),
-            imageVector = AnalyticsIcon,
+            imageVector = WalletIcon,
             contentDescription = "Logo",
             tint = MaterialTheme.colorScheme.onBackground
         )

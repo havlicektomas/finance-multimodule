@@ -1,8 +1,8 @@
 package dev.havlicektomas.core.data.auth
 
 import android.content.SharedPreferences
-import dev.havlicektomas.core.domain.AuthInfo
-import dev.havlicektomas.core.domain.SessionStorage
+import dev.havlicektomas.core.domain.auth.AuthInfo
+import dev.havlicektomas.core.domain.auth.SessionStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString

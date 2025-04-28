@@ -1,7 +1,7 @@
 package dev.havlicektomas.android_test
 
-import dev.havlicektomas.core.domain.AuthInfo
-import dev.havlicektomas.core.domain.SessionStorage
+import dev.havlicektomas.core.domain.auth.AuthInfo
+import dev.havlicektomas.core.domain.auth.SessionStorage
 
 class SessionStorageFake: SessionStorage {
 

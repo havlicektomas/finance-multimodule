@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_transaction">Create transaction</string>
+    <string name="close">Close</string>
+    <string name="create">Create</string>
+    <string name="transaction_title_hint">+ Add Title</string>
+    <string name="transaction_note_hint">+ Add Note</string>
+    <string name="transaction_created">Transaction successfully created!</string>
+</resources>
