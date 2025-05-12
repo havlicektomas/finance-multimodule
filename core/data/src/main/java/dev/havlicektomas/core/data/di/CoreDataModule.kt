@@ -1,11 +1,15 @@
 package dev.havlicektomas.core.data.di
 
 import android.content.SharedPreferences
+import androidx.room.Room
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import dev.havlicektomas.core.data.auth.EncryptedSessionStorage
+import dev.havlicektomas.core.data.database.FinanceDatabase
+import dev.havlicektomas.core.data.database.RoomLocalTransactionDataSource
 import dev.havlicektomas.core.data.networking.HttpClientFactory
 import dev.havlicektomas.core.domain.auth.SessionStorage
+import dev.havlicektomas.core.domain.finance.LocalTransactionDataSource
 import io.ktor.client.engine.cio.CIO
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.singleOf
@@ -26,4 +30,16 @@ val coreDataModule = module {
         )
     }
     singleOf(::EncryptedSessionStorage).bind<SessionStorage>()
+
+    single {
+        Room.databaseBuilder(
+            androidApplication(),
+            FinanceDatabase::class.java,
+            "finance.db"
+        ).build()
+    }
+    single { 
+        get<FinanceDatabase>().transactionDao
+    }
+    singleOf(::RoomLocalTransactionDataSource).bind<LocalTransactionDataSource>()
 }
