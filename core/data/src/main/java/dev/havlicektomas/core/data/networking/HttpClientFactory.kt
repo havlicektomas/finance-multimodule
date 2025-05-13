@@ -1,6 +1,8 @@
 package dev.havlicektomas.core.data.networking
 
 import dev.havlicektomas.core.data.BuildConfig
+import dev.havlicektomas.core.data.networking.dto.AccessTokenRequest
+import dev.havlicektomas.core.data.networking.dto.AccessTokenResponse
 import dev.havlicektomas.core.domain.auth.AuthInfo
 import dev.havlicektomas.core.domain.auth.SessionStorage
 import dev.havlicektomas.core.domain.util.Result
