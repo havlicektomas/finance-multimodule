@@ -11,6 +11,7 @@ import dev.havlicektomas.core.data.networking.HttpClientFactory
 import dev.havlicektomas.core.domain.auth.SessionStorage
 import dev.havlicektomas.core.domain.finance.LocalTransactionDataSource
 import io.ktor.client.engine.cio.CIO
+import kotlinx.coroutines.CoroutineScope
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -30,7 +31,6 @@ val coreDataModule = module {
         )
     }
     singleOf(::EncryptedSessionStorage).bind<SessionStorage>()
-
     single {
         Room.databaseBuilder(
             androidApplication(),
