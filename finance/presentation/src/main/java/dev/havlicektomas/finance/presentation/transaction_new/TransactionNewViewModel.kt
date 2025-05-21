@@ -6,9 +6,9 @@ import androidx.compose.runtime.setValue
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.havlicektomas.core.domain.finance.TransactionRepository
 import dev.havlicektomas.core.domain.util.Result
 import dev.havlicektomas.core.presentation.ui.asUiText
-import dev.havlicektomas.finance.domain.TransactionRepository
 import dev.havlicektomas.finance.presentation.mapper.toDomainTransaction
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -78,13 +78,8 @@ class TransactionNewViewModel(
 
     private fun createTransaction() {
         val transaction = state.transaction.toDomainTransaction()
-
         viewModelScope.launch {
-            state = state.copy(isSavingTransaction = true)
-            val result = repository.createTransaction(transaction)
-            state = state.copy(isSavingTransaction = false)
-
-            when(result) {
+            when(val result = repository.upsertTransaction(transaction)) {
                 is Result.Error -> {
                     eventChannel.send(TransactionNewEvent.Error(result.error.asUiText()))
                 }

@@ -3,6 +3,7 @@ package dev.havlicektomas.finance.presentation.mapper
 import dev.havlicektomas.core.domain.finance.FinanceTransaction
 import dev.havlicektomas.finance.presentation.model.TransactionsPerDay
 import dev.havlicektomas.finance.presentation.model.UITransaction
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -15,7 +16,11 @@ fun UITransaction.toDomainTransaction(): FinanceTransaction {
         amount = this.amount.toDouble(),
         note = this.note,
         category = this.category,
-        timestamp = if (this.timestamp.isEmpty()) ZonedDateTime.now() else ZonedDateTime.parse(this.timestamp)
+        timestamp = if (this.timestamp.isEmpty()) {
+            ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC"))
+        } else {
+            ZonedDateTime.parse(this.timestamp)
+        }
     )
 }
 

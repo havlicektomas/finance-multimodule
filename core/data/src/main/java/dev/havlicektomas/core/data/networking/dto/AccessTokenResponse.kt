@@ -1,4 +1,4 @@
-package dev.havlicektomas.core.data.networking
+package dev.havlicektomas.core.data.networking.dto
 
 import kotlinx.serialization.Serializable
 

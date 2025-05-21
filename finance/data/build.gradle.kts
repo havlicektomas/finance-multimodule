@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.finance.android.library)
+    alias(libs.plugins.finance.jvm.ktor)
 }
 
 android {
@@ -12,6 +13,8 @@ dependencies {
     implementation(projects.finance.domain)
 
     implementation(libs.bundles.koin)
+    implementation(libs.androidx.work)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
