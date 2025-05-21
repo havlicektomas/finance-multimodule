@@ -8,4 +8,5 @@ interface RemoteTransactionDataSource {
     suspend fun getTransactions(): Result<List<FinanceTransaction>, DataError.Network>
     suspend fun postTransaction(transaction: FinanceTransaction): Result<FinanceTransaction, DataError.Network>
     suspend fun deleteTransaction(id: String): EmptyResult<DataError.Network>
+    suspend fun logout(): EmptyResult<DataError.Network>
 }

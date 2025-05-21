@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dev.havlicektomas.core.domain.finance.SyncTransactionScheduler
 import dev.havlicektomas.core.domain.finance.TransactionRepository
 import dev.havlicektomas.finance.presentation.mapper.financeTransactionsToTransactionsPerDay
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -14,7 +15,8 @@ import kotlin.time.Duration.Companion.minutes
 
 class TransactionOverviewViewModel(
     private val repository: TransactionRepository,
-    private val syncScheduler: SyncTransactionScheduler
+    private val syncScheduler: SyncTransactionScheduler,
+    private val applicationScope: CoroutineScope,
 ): ViewModel() {
 
     val state: StateFlow<TransactionOverviewState> = repository.transactionsFlow()
@@ -51,6 +53,12 @@ class TransactionOverviewViewModel(
             }
             TransactionOverviewAction.OnSettingsClick -> TODO()
             TransactionOverviewAction.OnShowAllTransactionsClick -> TODO()
+        }
+    }
+
+    private fun logout() {
+        applicationScope.launch {
+            repository.logout()
         }
     }
 }

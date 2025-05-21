@@ -76,7 +76,7 @@ class TransactionRepositoryImpl(
 
     }
 
-    override suspend fun deleteRunTransactions(id: FinanceTransactionId) {
+    override suspend fun deleteTransaction(id: FinanceTransactionId) {
         localTransactionDataSource.deleteTransaction(id)
 
         // Edge case where the run is created in offline-mode,
@@ -147,5 +147,12 @@ class TransactionRepositoryImpl(
             createJobs.forEach { it.join() }
             deleteJobs.forEach { it.join() }
         }
+    }
+
+    override suspend fun logout(): EmptyResult<DataError> {
+        syncTransactionScheduler.cancelAllSyncs()
+        localTransactionDataSource.deleteAllTransactions()
+        sessionStorage.set(null)
+        return remoteTransactionDataSource.logout()
     }
 }

@@ -10,9 +10,12 @@ import dev.havlicektomas.core.domain.finance.RemoteTransactionDataSource
 import dev.havlicektomas.core.domain.util.DataError
 import dev.havlicektomas.core.domain.util.EmptyResult
 import dev.havlicektomas.core.domain.util.Result
+import dev.havlicektomas.core.domain.util.asEmptyDataResult
 import dev.havlicektomas.core.domain.util.map
 import dev.havlicektomas.finance.data.networking.mapper.toCreateRequest
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.auth.authProviders
+import io.ktor.client.plugins.auth.providers.BearerAuthProvider
 
 class KtorRemoteTransactionDataSource(
     private val httpClient: HttpClient,
@@ -40,5 +43,17 @@ class KtorRemoteTransactionDataSource(
                 "id" to id
             )
         )
+    }
+
+    override suspend fun logout(): EmptyResult<DataError.Network> {
+        val result = httpClient.get<Unit>(
+            route = "/logout"
+        ).asEmptyDataResult()
+
+        httpClient.authProviders.filterIsInstance<BearerAuthProvider>()
+            .firstOrNull()
+            ?.clearToken()
+
+        return result
     }
 }

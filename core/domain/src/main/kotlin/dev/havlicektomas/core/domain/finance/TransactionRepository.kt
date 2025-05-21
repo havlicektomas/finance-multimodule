@@ -8,6 +8,7 @@ interface TransactionRepository {
     fun transactionsFlow(): Flow<List<FinanceTransaction>>
     suspend fun fetchTransactions(): EmptyResult<DataError>
     suspend fun upsertTransaction(transaction: FinanceTransaction): EmptyResult<DataError>
-    suspend fun deleteRunTransactions(id: FinanceTransactionId)
+    suspend fun deleteTransaction(id: FinanceTransactionId)
     suspend fun syncPendingTransactions()
+    suspend fun logout(): EmptyResult<DataError>
 }
