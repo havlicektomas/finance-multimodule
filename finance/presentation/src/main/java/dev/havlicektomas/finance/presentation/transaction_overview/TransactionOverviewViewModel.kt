@@ -2,15 +2,19 @@ package dev.havlicektomas.finance.presentation.transaction_overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.havlicektomas.core.domain.finance.SyncTransactionScheduler
 import dev.havlicektomas.core.domain.finance.TransactionRepository
 import dev.havlicektomas.finance.presentation.mapper.financeTransactionsToTransactionsPerDay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.minutes
 
 class TransactionOverviewViewModel(
-    private val repository: TransactionRepository
+    private val repository: TransactionRepository,
+    private val syncScheduler: SyncTransactionScheduler
 ): ViewModel() {
 
     val state: StateFlow<TransactionOverviewState> = repository.transactionsFlow()
@@ -29,6 +33,16 @@ class TransactionOverviewViewModel(
             started = SharingStarted.WhileSubscribed(5000L),
             initialValue = TransactionOverviewState()
         )
+
+    init {
+        viewModelScope.launch {
+            syncScheduler.scheduleSync(
+                type = SyncTransactionScheduler.SyncType.FetchTransactions(30.minutes)
+            )
+            repository.syncPendingTransactions()
+            repository.fetchTransactions()
+        }
+    }
 
     fun onAction(action: TransactionOverviewAction) {
         when (action) {

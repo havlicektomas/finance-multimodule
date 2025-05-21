@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.GlobalContext.startKoin
 import timber.log.Timber
 
@@ -28,6 +29,7 @@ class FinanceApp: Application() {
         startKoin {
             androidLogger()
             androidContext(this@FinanceApp)
+            workManagerFactory()
             modules(
                 authDataModule,
                 authViewModelModule,

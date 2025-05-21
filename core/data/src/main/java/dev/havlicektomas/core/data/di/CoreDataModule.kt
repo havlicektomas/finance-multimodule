@@ -41,5 +41,8 @@ val coreDataModule = module {
     single { 
         get<FinanceDatabase>().transactionDao
     }
+    single {
+        get<FinanceDatabase>().transactionPendingSyncDao
+    }
     singleOf(::RoomLocalTransactionDataSource).bind<LocalTransactionDataSource>()
 }

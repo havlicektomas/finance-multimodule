@@ -13,6 +13,8 @@ dependencies {
     implementation(projects.finance.domain)
 
     implementation(libs.bundles.koin)
+    implementation(libs.androidx.work)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
