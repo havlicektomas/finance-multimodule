@@ -6,4 +6,6 @@
     <string name="transaction_title_hint">+ Add Title</string>
     <string name="transaction_note_hint">+ Add Note</string>
     <string name="transaction_created">Transaction successfully created!</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
 </resources>

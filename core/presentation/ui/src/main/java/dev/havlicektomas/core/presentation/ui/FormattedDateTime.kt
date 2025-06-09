@@ -1,5 +1,6 @@
 package dev.havlicektomas.core.presentation.ui
 
+import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -17,3 +18,11 @@ fun ZonedDateTime.getFormattedLocalDate(): String {
         .ofPattern("MMM dd, yyyy")
         .format(dateTimeInLocalTime)
 }
+
+fun LocalDate.getFormattedLocalDate(): String {
+    return DateTimeFormatter
+        .ofPattern("MMM dd, yyyy")
+        .format(this)
+}
+
+fun LocalDate.isToday() = this.isEqual(LocalDate.now())

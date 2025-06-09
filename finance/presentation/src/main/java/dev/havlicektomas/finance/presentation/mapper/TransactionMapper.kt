@@ -1,6 +1,11 @@
 package dev.havlicektomas.finance.presentation.mapper
 
+import android.text.format.DateUtils.isToday
 import dev.havlicektomas.core.domain.finance.FinanceTransaction
+import dev.havlicektomas.core.presentation.ui.UiText
+import dev.havlicektomas.core.presentation.ui.getFormattedLocalDate
+import dev.havlicektomas.core.presentation.ui.isToday
+import dev.havlicektomas.finance.presentation.R
 import dev.havlicektomas.finance.presentation.model.TransactionsPerDay
 import dev.havlicektomas.finance.presentation.model.UITransaction
 import java.time.ZoneId
@@ -43,7 +48,11 @@ fun financeTransactionsToTransactionsPerDay(transactions: List<FinanceTransactio
 
     return sortedTransactions.map { item ->
         TransactionsPerDay(
-            date = item.key.format(DateTimeFormatter.ISO_DATE),
+            date = when {
+                item.key.isToday() -> UiText.StringResource(R.string.today)
+                item.key.minusDays(1).isToday() -> UiText.StringResource(R.string.yesterday)
+                else -> UiText.DynamicString(item.key.getFormattedLocalDate())
+            },
             transactions = item.value.map { transaction ->
                 transaction.toUITransaction()
             }

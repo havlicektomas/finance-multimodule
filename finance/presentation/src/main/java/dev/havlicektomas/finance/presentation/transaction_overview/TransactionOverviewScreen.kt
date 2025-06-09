@@ -22,6 +22,8 @@ import dev.havlicektomas.core.presentation.designsystem.components.FinanceAppBar
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceAppBarAction
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceFloatingActionButton
 import dev.havlicektomas.core.presentation.designsystem.components.FinanceScaffold
+import dev.havlicektomas.core.presentation.ui.UiText
+import dev.havlicektomas.finance.presentation.R
 import dev.havlicektomas.finance.presentation.model.TransactionsPerDay
 import dev.havlicektomas.finance.presentation.model.UITransaction
 import dev.havlicektomas.finance.presentation.transaction_overview.component.TransactionOverviewScreenLandscape
@@ -137,7 +139,7 @@ private fun TransactionOverviewScreenPreview() {
                 thisWeekSum = "$2500.00",
                 latestTransactions = listOf(
                     TransactionsPerDay(
-                        date = "Today",
+                        date = UiText.StringResource(R.string.today),
                         transactions = listOf(
                             UITransaction(
                                 type = FinanceTransactionType.EXPENSE,
@@ -160,7 +162,7 @@ private fun TransactionOverviewScreenPreview() {
                         )
                     ),
                     TransactionsPerDay(
-                        date = "Yesterday",
+                        date = UiText.StringResource(R.string.yesterday),
                         transactions = listOf(
                             UITransaction(
                                 type = FinanceTransactionType.EXPENSE,
